@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '~/components/Layouts/components/Header';
 
-function DefaultLayout({ children }) {
+function HeaderOnly({ children }) {
     return (
         <>
             <Header />
@@ -13,4 +13,4 @@ function DefaultLayout({ children }) {
     );
 }
 
-export default DefaultLayout;
+export default HeaderOnly;
