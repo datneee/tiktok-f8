@@ -9,6 +9,7 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItems';
+import Button from '~/components/Buttons';
 
 const cx = classNames.bind(styles);
 
@@ -43,7 +44,7 @@ function Header() {
                     )}
                 >
                     <div className={cx('search')}>
-                        <input placeholder="search account and videos" spellCheck={false} />
+                        <input placeholder="Search account and videos" spellCheck={false} />
                         <button className={cx('clear-search-btn')}>
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
@@ -53,7 +54,10 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
-                <div className={cx('actions')}></div>
+                <div className={cx('actions')}>
+                    <Button text>+ Tải lên</Button>
+                    <Button primary>Log In</Button>
+                </div>
             </div>
         </header>
     );
