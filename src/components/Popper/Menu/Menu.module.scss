@@ -1,0 +1,19 @@
+// Menu
+.menu-list {
+    // MEnu item
+    .menu-item {
+        margin-left: 0;
+        justify-content: start;
+        border-radius: 0;
+        font-weight: 500;
+        padding: 11px 18px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.06);
+        }
+    }
+}
+
+.menu-popper {
+    padding-bottom: 8px;
+}

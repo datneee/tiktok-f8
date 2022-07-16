@@ -1,17 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames/bind';
-import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faSpinner,
+    faCircleXmark,
+    faMagnifyingGlass,
+    faCircleQuestion,
+    faCoins,
+    faEarthAsia,
+    faEllipsisVertical,
+    faGear,
+    faKeyboard,
+    faSignOut,
+    faUser,
+    faLanguage,
+} from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItems';
 import Button from '~/components/Buttons';
+import Menu from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faLanguage} />,
+        title: 'Tiếng Việt',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Phản hồi và trợ giúp ',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Phím tắt trên bàn phím',
+    },
+];
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
@@ -29,8 +59,8 @@ function Header() {
                     <img src={images.logo} alt="Tiktok" />
                 </div>
                 <Tippy
-                    interactive
                     visible={searchResult.length > 0}
+                    interactive
                     render={(atrrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...atrrs}>
                             <PopperWrapper>
@@ -55,8 +85,13 @@ function Header() {
                     </div>
                 </Tippy>
                 <div className={cx('actions')}>
-                    <Button text>+ Tải lên</Button>
+                    <Button text={true}>+ Tải lên</Button>
                     <Button primary>Log In</Button>
+                    <Menu items={MENU_ITEMS}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>
