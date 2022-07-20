@@ -31,6 +31,8 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItems';
 import Button from '~/components/Buttons';
 import Menu from '~/components/Popper/Menu';
+import { UploadIcon, MessageIcon, InboxIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -114,7 +116,6 @@ function Header() {
                     <img src={images.logo} alt="Tiktok" />
                 </div>
                 <HeadlessTippy
-                    visible={searchResult.length > 0}
                     interactive
                     render={(atrrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...atrrs}>
@@ -142,16 +143,19 @@ function Header() {
 
                 <div className={cx('actions')}>
                     <Button text={true}>+ Tải lên</Button>
+                    {/* <UploadIcon/> */}
                     {currenUser ? (
                         <>
-                            <Tippy content="Hộp thư" placement="bottom">
-                                <button className={cx('actions-btn')}>
-                                    <FontAwesomeIcon icon={faPaperPlane} />
-                                </button>
-                            </Tippy>
                             <Tippy content="Tin nhắn" placement="bottom">
                                 <button className={cx('actions-btn')}>
-                                    <FontAwesomeIcon icon={faEnvelopeOpenText} />
+                                    {/* <FontAwesomeIcon icon={faEnvelopeOpenText} /> */}
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Hộp thư" placement="bottom">
+                                <button className={cx('actions-btn')}>
+                                    {/* <FontAwesomeIcon icon={faPaperPlane} /> */}
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -160,10 +164,11 @@ function Header() {
                     )}
                     <Menu items={currenUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currenUser ? (
-                            <img
+                            <Image
                                 alt="Pham Van Dat"
                                 className={cx('actions-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7121549785044516870~c5_720x720.jpeg?x-expires=1658286000&x-signature=uyYuTSAnGDZeS003Ex3fA4BgPGs%3D"
+                                fallBack="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7121549785044516870~c5_720x720.jpeg?x-expires=1658473200&x-signature=nks%2FsnflgeSWAuw5VMA1jy2Svqc%3D"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
