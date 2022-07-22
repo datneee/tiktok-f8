@@ -28,11 +28,11 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountItem from '~/components/AccountItems';
 import Button from '~/components/Buttons';
 import Menu from '~/components/Popper/Menu';
 import { UploadIcon, MessageIcon, InboxIcon } from '~/components/Icons';
 import Image from '~/components/Image';
+import Search from '~/components/Layouts/components/Search';
 
 const cx = classNames.bind(styles);
 
@@ -69,13 +69,6 @@ const MENU_ITEMS = [
 function Header() {
     const currenUser = true;
 
-    const [searchResult, setSearchResult] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
@@ -115,32 +108,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
                 </div>
-                <HeadlessTippy
-                    interactive
-                    render={(atrrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...atrrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Account</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search account and videos" spellCheck={false} />
-                        <button className={cx('clear-search-btn')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading-search')} icon={faSpinner} />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
-
+                <Search />
                 <div className={cx('actions')}>
                     <Button text={true}>+ Tải lên</Button>
                     {/* <UploadIcon/> */}
@@ -156,6 +124,7 @@ function Header() {
                                 <button className={cx('actions-btn')}>
                                     {/* <FontAwesomeIcon icon={faPaperPlane} /> */}
                                     <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
@@ -168,7 +137,6 @@ function Header() {
                                 alt="Pham Van Dat"
                                 className={cx('actions-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7121549785044516870~c5_720x720.jpeg?x-expires=1658286000&x-signature=uyYuTSAnGDZeS003Ex3fA4BgPGs%3D"
-                                fallBack="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7121549785044516870~c5_720x720.jpeg?x-expires=1658473200&x-signature=nks%2FsnflgeSWAuw5VMA1jy2Svqc%3D"
                             />
                         ) : (
                             <button className={cx('more-btn')}>

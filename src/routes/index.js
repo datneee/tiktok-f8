@@ -1,7 +1,7 @@
 import { HeaderOnly } from '~/components/Layouts';
 
 import React from 'react';
-import { Home, Following, Upload } from '~/pages';
+import { Home, Following, Upload, Profile } from '~/pages';
 
 export const publicRoutes = [
     {
@@ -16,6 +16,10 @@ export const publicRoutes = [
         path: '/upload',
         component: Upload,
         layout: HeaderOnly,
+    },
+    {
+        path: '/@:nickname',
+        component: Profile,
     },
 ];
 
