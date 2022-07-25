@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faSpinner,
@@ -26,6 +27,8 @@ import 'tippy.js/dist/tippy.css';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
+
+import config from '~/config';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Buttons';
@@ -106,7 +109,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner-header')}>
                 <div className={cx('logo')}>
-                    <img src={images.logo} alt="Tiktok" />
+                    <Link className={cx('logo-link')} to={config.routes.home}>
+                        <img src={images.logo} alt="Tiktok" />
+                    </Link>
                 </div>
                 <Search />
                 <div className={cx('actions')}>

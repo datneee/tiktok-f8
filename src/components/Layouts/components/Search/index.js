@@ -10,6 +10,7 @@ import { faSpinner, faCircleXmark, faMagnifyingGlass } from '@fortawesome/free-s
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
+import * as apiService from '~/services';
 import AccountItem from '~/components/AccountItems';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
@@ -36,21 +37,32 @@ function Search() {
             setSearchResult([]);
             return;
         }
-        setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
+
+        const fetchApi = async () => {
+            try {
+                setLoading(true);
+                const res = await apiService.search(debounced);
+                setSearchResult(res);
+
                 setLoading(false);
-            })
-            .catch(() => {
+            } catch (error) {
                 setLoading(false);
-            });
+            }
+        };
+        fetchApi();
     }, [debounced]);
 
     const handleHideResult = () => {
         setShowResultSearch(false);
     };
+    const handleChangeInput = (e) => {
+        const searchValue = e.target.value;
+
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+    const handleSubmitSearch = (e) => {};
     return (
         <HeadlessTippy
             interactive
@@ -73,7 +85,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search account and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChangeInput}
                     onFocus={() => setShowResultSearch(true)}
                 />
                 {!!searchValue && !loading && (
@@ -82,7 +94,11 @@ function Search() {
                     </button>
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading-search')} icon={faSpinner} />}
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    onClick={handleSubmitSearch}
+                    onMouseDown={(e) => e.preventDefault()}
+                >
                     {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
                     <SearchIcon />
                 </button>
