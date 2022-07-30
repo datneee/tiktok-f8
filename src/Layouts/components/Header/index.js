@@ -35,7 +35,7 @@ import Button from '~/components/Buttons';
 import Menu from '~/components/Popper/Menu';
 import { UploadIcon, MessageIcon, InboxIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import Search from '~/components/Layouts/components/Search';
+import Search from '~/Layouts/components/Search';
 
 const cx = classNames.bind(styles);
 

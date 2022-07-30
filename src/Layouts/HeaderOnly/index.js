@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from '~/components/Layouts/components/Header';
+import Header from '~/Layouts/components/Header';
 
 function HeaderOnly({ children }) {
     return (

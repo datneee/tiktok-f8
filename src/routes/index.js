@@ -1,4 +1,4 @@
-import { HeaderOnly } from '~/components/Layouts';
+import { HeaderOnly } from '~/Layouts';
 import config from '~/config';
 
 import React from 'react';

@@ -25,7 +25,7 @@ function Search() {
 
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 650);
+    const debouncedValue = useDebounce(searchValue, 650);
 
     const handleClearSearchBtn = () => {
         setSearchValue('');
@@ -33,7 +33,7 @@ function Search() {
         inputRef.current.focus();
     };
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
@@ -41,7 +41,7 @@ function Search() {
         const fetchApi = async () => {
             try {
                 setLoading(true);
-                const res = await apiService.search(debounced);
+                const res = await apiService.search(debouncedValue);
                 setSearchResult(res);
 
                 setLoading(false);
@@ -50,7 +50,7 @@ function Search() {
             }
         };
         fetchApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     const handleHideResult = () => {
         setShowResultSearch(false);
